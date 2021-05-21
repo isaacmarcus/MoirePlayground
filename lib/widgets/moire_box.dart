@@ -1,62 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:moire_app/constants.dart';
 
-class MoireBox extends StatefulWidget {
-  int numberOfBoxes;
-  var borderColour;
-  double xPosition;
-  double yPosition;
+class MoireBox extends StatelessWidget {
+  final int numberOfBoxes;
+  final borderColour;
+  final double xPosition;
+  final double yPosition;
   final BuildContext scrnContext;
-  double xWidth;
-  double yHeight;
+  final double boxWidth;
+  final double boxHeight;
 
   MoireBox({
+    this.borderColour,
+    required this.boxHeight,
+    required this.boxWidth,
     required this.numberOfBoxes,
-    required this.borderColour,
-    this.xPosition = 0,
-    this.yPosition = 0,
     required this.scrnContext,
-    this.xWidth = 0,
-    this.yHeight = 0,
+    required this.xPosition,
+    required this.yPosition,
   });
 
-  void setXPosition(val) {
-    xPosition = val;
-  }
-
-  void setYPosition(val) {
-    yPosition = val;
-  }
-
-  void setXWidth(val) {
-    xWidth = val;
-  }
-
-  void setYHeight(val) {
-    yHeight = val;
-  }
-
-  double getXPosition(val) {
-    return this.xPosition.toDouble();
-  }
-
-  double getYPosition(val) {
-    return this.yPosition.toDouble();
-  }
-
-  double getXWidth(val) {
-    return this.xWidth.toDouble();
-  }
-
-  double getYHeight(val) {
-    return this.yHeight.toDouble();
-  }
-
-  @override
-  _MoireBoxState createState() => _MoireBoxState();
-}
-
-class _MoireBoxState extends State<MoireBox> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -66,38 +29,37 @@ class _MoireBoxState extends State<MoireBox> {
 
   List<Widget> _buildBoxes() {
     // query to get screen sizes
-    double screenWidth = MediaQuery.of(widget.scrnContext).size.width;
-    double screenHeight = MediaQuery.of(widget.scrnContext).size.height;
+    double screenWidth = MediaQuery.of(scrnContext).size.width;
+    double screenHeight = MediaQuery.of(scrnContext).size.height;
     // list to contain container widgets
     List<Widget> boxList = [];
     // default box width and heights
-    double boxWidth = screenWidth * 0.75;
-    double boxHeight = screenHeight * 0.8;
+    // double boxWidth = screenWidth * 0.75;
+    // double boxHeight = screenHeight * 0.8;
     //  margins
-    double leftMargin = ((screenWidth - boxWidth) / 2) + widget.xPosition;
-    double rightMargin = ((screenWidth - boxWidth) / 2) - widget.xPosition;
-    double topMargin = ((screenHeight - boxHeight) / 2) + widget.yPosition;
-    double botMargin = ((screenHeight - boxHeight) / 2) +
-        screenHeight * 0.05 -
-        widget.yPosition;
+    double leftMargin = ((screenWidth - boxWidth) / 2) + xPosition;
+    double rightMargin = ((screenWidth - boxWidth) / 2) - xPosition;
+    double topMargin = ((screenHeight - boxHeight) / 2) + yPosition;
+    double botMargin =
+        ((screenHeight - boxHeight) / 2) + screenHeight * 0.05 - yPosition;
 
-    if (widget.xWidth != 0) {
-      leftMargin = ((screenWidth - widget.xWidth) / 2) + widget.xPosition;
-      rightMargin = ((screenWidth - widget.xWidth) / 2) - widget.xPosition;
+    if (boxWidth != 0) {
+      leftMargin = ((screenWidth - boxWidth) / 2) + xPosition;
+      rightMargin = ((screenWidth - boxWidth) / 2) - xPosition;
     }
 
-    if (widget.yHeight != 0) {
-      topMargin = ((screenHeight - widget.yHeight) / 2) - widget.yPosition;
-      botMargin = ((screenHeight - widget.yHeight) / 2) +
-          screenHeight * 0.05 +
-          widget.yPosition;
+    if (boxHeight != 0) {
+      topMargin = ((screenHeight - boxHeight) / 2) - yPosition;
+      botMargin =
+          ((screenHeight - boxHeight) / 2) + screenHeight * 0.05 + yPosition;
     }
 
     // inner starting margins
     double hMargin = 5;
     double vMargin = 8;
+
     // for loop to build containers
-    for (int i = 0; i < widget.numberOfBoxes; i++) {
+    for (int i = 0; i < numberOfBoxes; i++) {
       if (leftMargin + rightMargin >= screenWidth ||
           topMargin + botMargin + 60 >= screenHeight) {
         // print("margin limit reached, cutting off extra boxes");
@@ -110,7 +72,7 @@ class _MoireBoxState extends State<MoireBox> {
               leftMargin, topMargin, rightMargin, botMargin),
           decoration: BoxDecoration(
             border: Border.all(
-              color: widget.borderColour,
+              color: borderColour,
               width: 0.5,
             ),
           ),

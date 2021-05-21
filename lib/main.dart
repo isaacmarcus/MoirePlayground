@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moire_app/screens/moire_page.dart';
+import 'package:moire_app/screens/test_page.dart';
 
 import 'constants.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: MoirePage.id,
       routes: {
         MoirePage.id: (context) => MoirePage(),
+        TestPage.id: (context) => TestPage(),
       },
     );
   }
