@@ -9,15 +9,17 @@ class MoireBox extends StatelessWidget {
   final BuildContext scrnContext;
   final double boxWidth;
   final double boxHeight;
+  final double boxRadius;
 
   MoireBox({
-    this.borderColour,
+    required this.borderColour,
     required this.boxHeight,
     required this.boxWidth,
     required this.numberOfBoxes,
     required this.scrnContext,
     required this.xPosition,
     required this.yPosition,
+    required this.boxRadius,
   });
 
   @override
@@ -71,6 +73,7 @@ class MoireBox extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(
               leftMargin, topMargin, rightMargin, botMargin),
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(this.boxRadius)),
             border: Border.all(
               color: borderColour,
               width: 0.5,

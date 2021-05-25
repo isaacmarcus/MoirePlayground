@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../constants.dart';
 
@@ -30,6 +31,9 @@ class _BoxParamCardState extends State<BoxParamCard> {
     double _boxWidth = widget.paramList[boxIndex][2];
     double _boxHeight = widget.paramList[boxIndex][3];
     double _numOfBoxes = widget.paramList[boxIndex][4];
+    double _boxRadius = widget.paramList[boxIndex][6];
+    Color _currentColor = widget.paramList[boxIndex][5];
+
     // calculate screenwidth and height
     double _screenWidth = MediaQuery.of(widget.ctx).size.width;
     double _screenHeight = MediaQuery.of(widget.ctx).size.height;
@@ -48,7 +52,7 @@ class _BoxParamCardState extends State<BoxParamCard> {
           ),
         ),
         SizedBox(
-          height: 15,
+          height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -161,7 +165,7 @@ class _BoxParamCardState extends State<BoxParamCard> {
           ],
         ),
         SizedBox(
-          height: 10,
+          height: 5,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -192,7 +196,7 @@ class _BoxParamCardState extends State<BoxParamCard> {
           ],
         ),
         SizedBox(
-          height: 10,
+          height: 5,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -221,6 +225,90 @@ class _BoxParamCardState extends State<BoxParamCard> {
               style: themeData.textTheme.bodyText1,
             ),
           ],
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Box Radius (Curve):",
+              style: themeData.textTheme.bodyText1,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            // ** Y Position Slider **
+            Slider(
+              activeColor: themeData.primaryColorLight,
+              value: _boxRadius,
+              min: 0,
+              max: 1000,
+              onChanged: (double value) {
+                setState(() {
+                  widget.updateParam(boxIndex, 6, value.round());
+                });
+              },
+            ),
+            Text(
+              _boxRadius.round().toString(),
+              style: themeData.textTheme.bodyText1,
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Colour of Boxes:",
+              style: themeData.textTheme.bodyText1,
+            ),
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      titlePadding: const EdgeInsets.all(0.0),
+                      contentPadding: const EdgeInsets.all(0.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      content: SingleChildScrollView(
+                        child: SlidePicker(
+                          pickerColor: _currentColor,
+                          onColorChanged: (color) {
+                            setState(() {
+                              widget.updateParam(boxIndex, 5, color);
+                            });
+                          },
+                          paletteType: PaletteType.rgb,
+                          enableAlpha: false,
+                          displayThumbColor: true,
+                          showLabel: false,
+                          showIndicator: true,
+                          indicatorBorderRadius: const BorderRadius.vertical(
+                            top: const Radius.circular(15.0),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.circle,
+                color: _currentColor,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
         ),
       ],
     );

@@ -53,7 +53,7 @@ class _MoirePageState extends State<MoirePage>
 
   void addMoireBox(BuildContext _ctx) {
     setState(() {
-      masterParamsList.add([0.0, 0.0, 200.0, 200.0, 10]);
+      masterParamsList.add([0.0, 0.0, 200.0, 200.0, 10, Colors.redAccent, 0.0]);
       final int paramListInd = masterParamsList.length - 1;
 
       masterBoxParamList.add(BoxParamCard(
@@ -148,7 +148,8 @@ class _MoirePageState extends State<MoirePage>
         boxWidth: masterParamsList[i][2],
         boxHeight: masterParamsList[i][3],
         numberOfBoxes: masterParamsList[i][4],
-        borderColour: Colors.redAccent,
+        borderColour: masterParamsList[i][5],
+        boxRadius: masterParamsList[i][6],
       ));
     }
     return Stack(
