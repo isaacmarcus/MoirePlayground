@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moire_app/screens/moire_page.dart';
+import 'package:moire_app/screens/splash_page.dart';
 import 'package:moire_app/screens/test_page.dart';
-import 'package:moire_app/screens/color_picker.dart';
 
 import 'constants.dart';
 
@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'Moire Playground',
       theme: themeData,
       // Screen IDS initiated as static vars in respective screens
-      initialRoute: MoirePage.id,
+      initialRoute: SplashPage.id,
       routes: {
-        ColorApp.id: (context) => ColorApp(),
+        SplashPage.id: (context) => SplashPage(),
         MoirePage.id: (context) => MoirePage(),
         TestPage.id: (context) => TestPage(),
       },

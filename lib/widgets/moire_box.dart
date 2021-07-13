@@ -35,9 +35,6 @@ class MoireBox extends StatelessWidget {
     double screenHeight = MediaQuery.of(scrnContext).size.height;
     // list to contain container widgets
     List<Widget> boxList = [];
-    // default box width and heights
-    // double boxWidth = screenWidth * 0.75;
-    // double boxHeight = screenHeight * 0.8;
     //  margins
     double leftMargin = ((screenWidth - boxWidth) / 2) + xPosition;
     double rightMargin = ((screenWidth - boxWidth) / 2) - xPosition;

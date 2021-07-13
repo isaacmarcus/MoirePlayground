@@ -5,6 +5,7 @@ import 'package:moire_app/widgets/box_param_card.dart';
 import 'package:moire_app/widgets/master_app_bar.dart';
 import 'package:moire_app/widgets/menu_drawer.dart';
 import 'package:moire_app/widgets/moire_box.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../constants.dart';
@@ -25,11 +26,14 @@ class MoirePage extends StatefulWidget {
 
 class _MoirePageState extends State<MoirePage>
     with SingleTickerProviderStateMixin {
-  // class variables
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<bool> _infoPopup;
   late AnimationController _drawerSlideController;
+  // class variables
   List masterBoxList = [];
   List masterBoxParamList = [];
   List masterParamsList = [];
+  bool tooltip = true;
 
   @override
   void initState() {
@@ -111,10 +115,75 @@ class _MoirePageState extends State<MoirePage>
       padding: MediaQuery.of(context).size.width >= 725
           ? kMasterPaddingL
           : kMasterPaddingS,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[],
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            tooltip == true
+                ? Hero(
+                    tag: "tooltip",
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: BackdropFilter(
+                        filter:
+                            new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                        child: Card(
+                          color: Colors.grey.shade800.withOpacity(0.3),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Stack(
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      "Welcome to Moire Playground!",
+                                      style: themeData.textTheme.bodyText1,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      "\nSlide up menu at bottom of the screen for box parameters and click the plus button to add more boxes",
+                                      style: themeData.textTheme.bodyText1,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    // Button to close tool tip at start
+                                    Container(
+                                      margin: EdgeInsets.zero,
+                                      child: IconButton(
+                                          constraints: BoxConstraints(),
+                                          padding: const EdgeInsets.all(0),
+                                          iconSize: 24,
+                                          splashRadius: 10,
+                                          onPressed: () {
+                                            setState(() {
+                                              tooltip = false;
+                                            });
+                                          },
+                                          icon: Icon(
+                                            Icons.close_outlined,
+                                            color: Colors.white,
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : Hero(
+                    tag: "tooltip",
+                    child: Container(),
+                  ),
+          ],
+        ),
       ),
     );
   }
@@ -157,6 +226,7 @@ class _MoirePageState extends State<MoirePage>
     );
   }
 
+  // ** Widget to build box parameters in slide up panel
   Widget _buildBoxParams(BuildContext _ctx) {
     return new ListView.builder(
       shrinkWrap: true,

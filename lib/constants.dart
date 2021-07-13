@@ -12,7 +12,7 @@ const double kSymPadValueS = 28;
 const double kSymPadValueL = 60;
 
 const kMenuTitles = [
-  ['HOME', MoirePage.id],
+  ['RESET', MoirePage.id],
 ];
 
 ThemeData themeData = ThemeData(
