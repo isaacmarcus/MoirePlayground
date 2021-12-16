@@ -1,16 +1,15 @@
-# moire_app
+# Moire Playground
 
-A new Flutter project.
+A WebApp built on Flutter exploring the concept of "moire". What is traditionally looked and seen as something to avoid
+or something to remove from photos/art, can now be created easily using this.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Head over to https://isaacmarcus.github.io/MoirePlayground/ to get started
 
-A few resources to get you started if this is your first Flutter project:
+You'll be greeted with a base Moire Box, of which you can change the properties to achieve a desired shape/size.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Plugins/Libraries Used
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
