@@ -1,3 +1,5 @@
+![preview_img](https://github.com/isaacmarcus/MoirePlayground/blob/main/moire_playground_ss.png?raw=true)
+
 # Moire Playground
 
 A WebApp built on Flutter exploring the concept of "moire". What is traditionally looked and seen as something to avoid
@@ -26,8 +28,6 @@ You'll be greeted with a base Moire Box, of which you can change the properties 
 - flutter_native_splash: ^1.2.0
 - animated_splash_screen: ^1.1.0
 
-## WebApp Preview
-![preview_img](https://github.com/isaacmarcus/MoirePlayground/blob/main/moire_playground_ss.png?raw=true)
 
 
 
